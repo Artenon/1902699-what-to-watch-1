@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PromoFilmCard from '../../components/promoFilmCard/promoFilmCard';
 import SmallFilmCard from '../../components/smallFilmCard/smallFilmCard';
 
@@ -50,11 +51,11 @@ function MainContent({name, genre, year} : MainContentProps) : JSX.Element {
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link" href="/">
+            <Link className="logo__link" to="/">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <ul className="user-block">
