@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { films } from './mocks/films';
+import { promoFilm } from './mocks/promoFilm';
+import { favouriteFilms } from './mocks/favouriteFilms';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-const data : {
-  name: string,
-  genre: string,
-  year: number
-} = {
-  name: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  year: 2014
-};
-
 root.render(
   <React.StrictMode>
-    <App data={data} />
+    <App
+      films={films}
+      promoFilm={promoFilm}
+      favouriteFilms={favouriteFilms}
+    />
   </React.StrictMode>,
 );

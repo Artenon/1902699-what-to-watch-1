@@ -1,4 +1,4 @@
-function HeadGuest() {
+function HeadGuest() : JSX.Element {
   return (
     <>
       <div className="visually-hidden">

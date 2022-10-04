@@ -1,14 +1,16 @@
-import { Link } from 'react-router-dom';
 import PromoFilmCard from '../../components/promoFilmCard/promoFilmCard';
-import SmallFilmCard from '../../components/smallFilmCard/smallFilmCard';
+import ListOfFilms from '../../components/listOfFilms/listOfFilms';
+import { Film } from '../../types/films';
+import { Promo } from '../../types/promo';
+import Logo from '../../components/logo/logo';
 
 type MainContentProps = {
-  name: string,
-  genre: string,
-  year: number
+  films: Film[];
+  promoFilm: Promo;
 }
 
-function MainContent({name, genre, year} : MainContentProps) : JSX.Element {
+function MainContent({films, promoFilm}: MainContentProps): JSX.Element {
+  const {backgroundImage, name} = promoFilm;
   return (
     <>
       <div className="visually-hidden">
@@ -44,19 +46,13 @@ function MainContent({name, genre, year} : MainContentProps) : JSX.Element {
       </div>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <Link className="logo__link" to="/">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
+          <Logo isLinkLight={false} />
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -71,9 +67,7 @@ function MainContent({name, genre, year} : MainContentProps) : JSX.Element {
         </header>
 
         <PromoFilmCard
-          name={name}
-          genre={genre}
-          date={year}
+          film={promoFilm}
         />
       </section>
 
@@ -115,105 +109,7 @@ function MainContent({name, genre, year} : MainContentProps) : JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            <SmallFilmCard
-              name='Fantastic Beasts: The Crimes of Grindelwald'
-              imgSrc='fantastic-beasts-the-crimes-of-grindelwald.jpg'
-            />
-
-            <SmallFilmCard
-              name='Bohemian Rhapsody'
-              imgSrc='bohemian-rhapsody.jpg'
-            />
-
-            <SmallFilmCard
-              name='Macbeth'
-              imgSrc='macbeth.jpg'
-            />
-
-            <SmallFilmCard
-              name='Aviator'
-              imgSrc='aviator.jpg'
-            />
-
-            <SmallFilmCard
-              name='We need to talk about Kevin'
-              imgSrc='we-need-to-talk-about-kevin.jpg'
-            />
-
-            <SmallFilmCard
-              name='What We Do in the Shadows'
-              imgSrc='what-we-do-in-the-shadows.jpg'
-            />
-
-            <SmallFilmCard
-              name='Revenant'
-              imgSrc='revenant.jpg'
-            />
-
-            <SmallFilmCard
-              name='Johnny English'
-              imgSrc='johnny-english.jpg'
-            />
-
-            <SmallFilmCard
-              name='Shutter Island'
-              imgSrc='shutter-island.jpg'
-            />
-
-            <SmallFilmCard
-              name='Pulp Fiction'
-              imgSrc='pulp-fiction.jpg'
-            />
-
-            <SmallFilmCard
-              name='No Country for Old Men'
-              imgSrc='no-country-for-old-men.jpg'
-            />
-
-            <SmallFilmCard
-              name='Snatch'
-              imgSrc='snatch.jpg'
-            />
-
-            <SmallFilmCard
-              name='Moonrise Kingdom'
-              imgSrc='moonrise-kingdom.jpg'
-            />
-
-            <SmallFilmCard
-              name='Seven Years in Tibet'
-              imgSrc='seven-years-in-tibet.jpg'
-            />
-
-            <SmallFilmCard
-              name='Midnight Special'
-              imgSrc='midnight-special.jpg'
-            />
-
-            <SmallFilmCard
-              name='War of the Worlds'
-              imgSrc='war-of-the-worlds.jpg'
-            />
-
-            <SmallFilmCard
-              name='Dardjeeling Limited'
-              imgSrc='dardjeeling-limited.jpg'
-            />
-
-            <SmallFilmCard
-              name='Orlando'
-              imgSrc='orlando.jpg'
-            />
-
-            <SmallFilmCard
-              name='Mindhunter'
-              imgSrc='mindhunter.jpg'
-            />
-
-            <SmallFilmCard
-              name='Midnight Special'
-              imgSrc='midnight-special.jpg'
-            />
+            <ListOfFilms films={films} />
           </div>
 
           <div className="catalog__more">
@@ -222,13 +118,7 @@ function MainContent({name, genre, year} : MainContentProps) : JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo isLinkLight />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

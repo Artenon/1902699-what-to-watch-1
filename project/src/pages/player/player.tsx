@@ -1,4 +1,4 @@
-function Player() {
+function Player() : JSX.Element {
   return (
     <>
       <div className="visually-hidden">

@@ -7,41 +7,42 @@ import MoviePage from '../../pages/moviePage/moviePage';
 import AddReview from '../../pages/addReview/addReview';
 import Player from '../../pages/player/player';
 import PrivateRoute from '../privateRoute/privateRoute';
+import { Film } from '../../types/films';
+import { Promo } from '../../types/promo';
 
 type AppProps = {
-  data: {
-    name: string,
-    genre: string,
-    year: number
-  }
+  films: Film[];
+  promoFilm: Promo;
+  favouriteFilms: Film[];
 }
 
-function App({data} : AppProps): JSX.Element {
+function App(props: AppProps): JSX.Element {
+  const {films, promoFilm, favouriteFilms} = props;
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/'>
           <Route index element={
             <MainContent
-              name={data.name}
-              genre={data.genre}
-              year={data.year}
+              films={films}
+              promoFilm={promoFilm}
             />
           }
           />
           <Route path='login' element={ <SignIn /> } />
           <Route path='mylist' element={
-            <PrivateRoute isAuthorized={false}>
-              <MyList />
+            <PrivateRoute isAuthorized>
+              <MyList favouriteFilms={favouriteFilms} />
             </PrivateRoute>
           }
           />
           <Route path='films/'>
-            <Route path=':id' element={ <MoviePage /> } />
-            <Route path=':id/review' element={ <AddReview /> } />
+            <Route path=':filmId' element={ <MoviePage films={films} /> } />
+            <Route path=':filmId/review' element={ <AddReview films={films} /> } />
           </Route>
           <Route path='player/'>
-            <Route path=':id' element={ <Player /> } />
+            <Route path=':filmId' element={ <Player /> } />
           </Route>
         </Route>
         <Route path='*' element={ <NotFound /> } />
