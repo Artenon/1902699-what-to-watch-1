@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function SignIn() {
+function SignIn() : JSX.Element {
   return (
     <>
       <div className="visually-hidden">

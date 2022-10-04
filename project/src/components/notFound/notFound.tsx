@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function NotFound() {
+function NotFound() : JSX.Element {
   return (
     <div className="error_404 user-page">
       <header className="page-header user-page__head">
