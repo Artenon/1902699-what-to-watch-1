@@ -3,7 +3,7 @@ import { useState, ChangeEvent, Fragment } from 'react';
 function FormReview() {
   const [formData, setFormData] = useState({
     rating: 0,
-    reviewText: ''
+    comment: ''
   });
 
   const rateValues = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -13,7 +13,7 @@ function FormReview() {
   };
 
   const onChangeReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setFormData({...formData, reviewText: e.target.value});
+    setFormData({...formData, comment: e.target.value});
   };
 
   return (
@@ -46,7 +46,7 @@ function FormReview() {
             name="review-text"
             id="review-text"
             placeholder="Review text"
-            value={formData.reviewText}
+            value={formData.comment}
             onChange={onChangeReview}
           />
           <div className="add-review__submit">
