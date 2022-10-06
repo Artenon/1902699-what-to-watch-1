@@ -9,6 +9,7 @@ import Player from '../../pages/player/player';
 import PrivateRoute from '../privateRoute/privateRoute';
 import { Film } from '../../types/films';
 import { Promo } from '../../types/promo';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 type AppProps = {
   films: Film[];
@@ -30,18 +31,18 @@ function App(props: AppProps): JSX.Element {
             />
           }
           />
-          <Route path='login' element={ <SignIn /> } />
-          <Route path='mylist' element={
-            <PrivateRoute isAuthorized>
+          <Route path={AppRoute.Login} element={ <SignIn /> } />
+          <Route path={AppRoute.MyList} element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <MyList favouriteFilms={favouriteFilms} />
             </PrivateRoute>
           }
           />
-          <Route path='films/'>
+          <Route path={AppRoute.Films}>
             <Route path=':filmId' element={ <MoviePage films={films} /> } />
-            <Route path=':filmId/review' element={ <AddReview films={films} /> } />
+            <Route path={`:filmId${AppRoute.Review}`} element={ <AddReview films={films} /> } />
           </Route>
-          <Route path='player/'>
+          <Route path={AppRoute.Player}>
             <Route path=':filmId' element={ <Player /> } />
           </Route>
         </Route>
