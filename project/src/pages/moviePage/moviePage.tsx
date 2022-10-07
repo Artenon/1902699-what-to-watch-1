@@ -1,19 +1,32 @@
 import { Link, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/films';
 import NotFound from '../../components/notFound/notFound';
+import Tabs from '../../components/tabs/tabs';
+import { Tab } from '../../const';
+import { comments } from '../../mocks/comments';
+import MovieOverview from '../../components/movieOverview/movieOverview';
+import MovieDetails from '../../components/movieDetails/movieDetails';
+import MovieReviews from '../../components/movieReviews/movieReviews';
 
 type MoviePageProps = {
   films: Film[];
 };
 
 function MoviePage({films}: MoviePageProps): JSX.Element {
+  const [activeTab, setActiveTab] = useState(Tab.Overview);
+
   const {filmId} = useParams();
   const film = films.find((e) => e.id === Number(filmId));
 
   if (film === undefined) {
     return <NotFound />;
   }
+
+  const onTab = (tab: Tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <>
@@ -75,34 +88,27 @@ function MoviePage({films}: MoviePageProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to="#" className="film-nav__link">Overview</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to="#" className="film-nav__link">Details</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to="#" className="film-nav__link">Reviews</Link>
-                  </li>
-                </ul>
-              </nav>
+              <Tabs onTab={onTab} activeTab={activeTab} />
 
-              <div className="film-rating">
-                <div className="film-rating__score">{film.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
+              {activeTab === Tab.Overview &&
+                <MovieOverview
+                  rating={film.rating}
+                  description={film.description}
+                  director={film.director}
+                  starring={film.starring}
+                />}
 
-              <div className="film-card__text">
-                <p>{film.description}</p>
-                <p className="film-card__director"><strong>Director: {film.director}</strong></p>
+              {activeTab === Tab.Details &&
+                <MovieDetails
+                  director={film.director}
+                  starring={film.starring}
+                  runTime={film.runTime}
+                  genre={film.genre}
+                  released={film.released}
+                />}
 
-                <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
-              </div>
+              {activeTab === Tab.Reviews && <MovieReviews reviews={comments} />}
+
             </div>
           </div>
         </div>
