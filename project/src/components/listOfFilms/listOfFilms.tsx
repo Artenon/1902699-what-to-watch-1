@@ -9,11 +9,12 @@ type ListOfFilmsProps = {
 function ListOfFilms({films}: ListOfFilmsProps): JSX.Element {
   const [activeFilmId, setActiveFilmId] = useState(0);
 
-  // eslint-disable-next-line no-console
-  console.log(activeFilmId);
-
   const onMouseOver = (id: number) => {
     setActiveFilmId(id);
+  };
+
+  const onMouseOut = () => {
+    setActiveFilmId(0);
   };
 
   return (
@@ -25,7 +26,10 @@ function ListOfFilms({films}: ListOfFilmsProps): JSX.Element {
             name={film.name}
             previewImage={film.previewImage}
             id={film.id}
+            previewVideoLink={film.previewVideoLink}
             onMouseOver={onMouseOver}
+            onMouseOut={onMouseOut}
+            isActive={film.id === activeFilmId}
           />
         ))
       }
