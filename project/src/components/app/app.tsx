@@ -10,6 +10,7 @@ import PrivateRoute from '../privateRoute/privateRoute';
 import { Film } from '../../types/films';
 import { Promo } from '../../types/promo';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import ScrollToTop from '../scrollToTop/scrollToTop';
 
 type AppProps = {
   films: Film[];
@@ -22,6 +23,7 @@ function App(props: AppProps): JSX.Element {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path='/'>
           <Route index element={
