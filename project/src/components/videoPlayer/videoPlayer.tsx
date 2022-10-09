@@ -23,6 +23,7 @@ function VideoPlayer({src, poster}: VideoPlayerProps) {
       poster={poster}
       ref={videoRef}
       muted
+      loop
     >
       <source src={src} />
     </video>
