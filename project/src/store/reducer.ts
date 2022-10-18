@@ -1,15 +1,22 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { films } from '../mocks/films';
 import { promoFilm } from '../mocks/promoFilm';
-import { favouriteFilms } from '../mocks/favouriteFilms';
 import { Genre } from '../const';
-import { changeGenre, updateListOfFilms } from './actions';
+import { changeGenre, sortFilmsByGenre, loadFilms } from './actions';
+import { Film } from '../types/film';
+import { Promo } from '../types/promo';
 
-const initialState = {
+type stateType = {
+  genre: Genre;
+  listOfFilms: Film[];
+  promoFilm: Promo;
+  favouriteFilms: Film[];
+}
+
+const initialState: stateType = {
   genre: Genre.AllGenres,
-  listOfFilms: films,
+  listOfFilms: [],
   promoFilm,
-  favouriteFilms
+  favouriteFilms: []
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -17,15 +24,18 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
     })
-    .addCase(updateListOfFilms, (state) => {
-      state.listOfFilms = films.filter((film) => {
+    .addCase(sortFilmsByGenre, (state) => {
+      state.listOfFilms = state.listOfFilms.filter((film) => {
         if (state.genre === Genre.AllGenres) {
-          return films;
+          return state.listOfFilms;
         }
         else if (state.genre === film.genre) {
           return film;
         }
         return null;
       });
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.listOfFilms = action.payload;
     });
 });

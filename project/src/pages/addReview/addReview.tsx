@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/films';
+import { Film } from '../../types/film';
 import NotFound from '../../components/notFound/notFound';
 import FormReview from '../../components/formReview/formReview';
 

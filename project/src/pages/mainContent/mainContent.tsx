@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import PromoFilmCard from '../../components/promoFilmCard/promoFilmCard';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
-import { Film } from '../../types/films';
+import { Film } from '../../types/film';
 import { Promo } from '../../types/promo';
 import Logo from '../../components/logo/logo';
 import ListOfGenres from '../../components/ListOfGenres/ListOfGenres';
