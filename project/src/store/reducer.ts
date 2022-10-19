@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { promoFilm } from '../mocks/promoFilm';
 import { Genre } from '../const';
-import { changeGenre, sortFilmsByGenre, loadFilms } from './actions';
+import { changeGenre, sortFilmsByGenre, loadFilms, setLoadingStatus } from './actions';
 import { Film } from '../types/film';
 import { Promo } from '../types/promo';
 
@@ -10,13 +10,15 @@ type stateType = {
   listOfFilms: Film[];
   promoFilm: Promo;
   favouriteFilms: Film[];
+  isLoading: boolean;
 }
 
 const initialState: stateType = {
   genre: Genre.AllGenres,
   listOfFilms: [],
   promoFilm,
-  favouriteFilms: []
+  favouriteFilms: [],
+  isLoading: true
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -37,5 +39,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilms, (state, action) => {
       state.listOfFilms = action.payload;
+    })
+    .addCase(setLoadingStatus, (state, action) => {
+      state.isLoading = action.payload;
     });
 });
