@@ -12,6 +12,10 @@ export const loadFilms = createAction('data/loadFilms', (films: Film[]) => ({
   payload: films
 }));
 
+export const loadPromoFilm = createAction('data/loadPromoFilm', (film: Film) => ({
+  payload: film
+}));
+
 export const setLoadingStatus = createAction('data/setLoadingStatus', (status: boolean) => ({
   payload: status
 }));
