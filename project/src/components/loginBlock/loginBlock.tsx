@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus, AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 
 function LoginBlock(): JSX.Element {
   const {authorizationStatus, user} = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
   return (
     <ul className="user-block">
@@ -16,7 +18,7 @@ function LoginBlock(): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <Link to={AppRoute.Logout} className="user-block__link">Sign out</Link>
+              <Link to='/' className="user-block__link" onClick={() => dispatch(logoutAction())}>Sign out</Link>
             </li>
           </>
           :

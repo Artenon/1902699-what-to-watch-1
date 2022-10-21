@@ -1,6 +1,6 @@
 
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { getToken } from './token';
+import { getUser } from './user';
 
 const BASE_URL = 'https://10.react.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
@@ -12,10 +12,10 @@ export const createAPI = (): AxiosInstance => {
   });
 
   api.interceptors.request.use((config: AxiosRequestConfig) => {
-    const token = getToken();
+    const user = getUser();
 
-    if (token) {
-      config.headers['X-Token'] = token;
+    if (user) {
+      config.headers['X-Token'] = user.token;
     }
 
     return config;

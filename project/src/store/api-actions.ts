@@ -6,7 +6,7 @@ import { Film } from '../types/film';
 import { AuthData } from '../types/authData';
 import { UserData } from '../types/userData';
 import { APIRoute, AuthorizationStatus } from '../const';
-import { saveToken } from '../services/token';
+import { saveUser, removeUser } from '../services/user';
 
 export const fetchFilms = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -54,8 +54,23 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(data.token);
+    saveUser(data);
     dispatch(updateAuthorizationStatus(AuthorizationStatus.Auth));
     dispatch(loadUserData(data));
+  }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}
+>(
+  'user/logout',
+  async (_arg, {dispatch, extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    removeUser();
+    dispatch(updateAuthorizationStatus(AuthorizationStatus.NoAuth));
+    dispatch(loadUserData(null));
   }
 );

@@ -26,6 +26,6 @@ export const updateAuthorizationStatus = createAction('user/updateAuthorizationS
   payload: status
 }));
 
-export const loadUserData = createAction('user/loadUserData', (user: UserData) => ({
+export const loadUserData = createAction('user/loadUserData', (user: UserData | null) => ({
   payload: user
 }));

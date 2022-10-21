@@ -4,6 +4,7 @@ import { changeGenre, sortFilmsByGenre, loadFilms, loadPromoFilm, setLoadingStat
 import { Film } from '../types/film';
 import { UserData } from '../types/userData';
 import { AuthorizationStatus } from '../const';
+import { getUser } from '../services/user';
 
 type stateType = {
   genre: Genre;
@@ -21,8 +22,8 @@ const initialState: stateType = {
   promoFilm: null,
   favouriteFilms: [],
   isLoading: true,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  user: null
+  authorizationStatus: getUser() ? AuthorizationStatus.Auth : AuthorizationStatus.Unknown,
+  user: getUser()
 };
 
 export const reducer = createReducer(initialState, (builder) => {
