@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Genre } from '../const';
-import { changeGenre, sortFilmsByGenre, loadFilms, loadPromoFilm, setLoadingStatus, updateAuthorizationStatus } from './actions';
+import { changeGenre, sortFilmsByGenre, loadFilms, loadPromoFilm, setLoadingStatus, updateAuthorizationStatus, loadUserData } from './actions';
 import { Film } from '../types/film';
+import { UserData } from '../types/userData';
 import { AuthorizationStatus } from '../const';
 
 type stateType = {
@@ -11,6 +12,7 @@ type stateType = {
   favouriteFilms: Film[];
   isLoading: boolean;
   authorizationStatus: AuthorizationStatus;
+  user: UserData | null;
 }
 
 const initialState: stateType = {
@@ -19,7 +21,8 @@ const initialState: stateType = {
   promoFilm: null,
   favouriteFilms: [],
   isLoading: true,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  user: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -49,5 +52,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(loadUserData, (state, action) => {
+      state.user = action.payload;
     });
 });

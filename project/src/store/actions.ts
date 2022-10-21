@@ -1,6 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Genre } from '../const';
 import { Film } from '../types/film';
+import { UserData } from '../types/userData';
+import { AuthorizationStatus } from '../const';
 
 export const changeGenre = createAction('main/changeGenre', (genre: Genre) => ({
   payload: genre
@@ -20,6 +22,10 @@ export const setLoadingStatus = createAction('data/setLoadingStatus', (status: b
   payload: status
 }));
 
-export const updateAuthorizationStatus = createAction('login/updateAuthorizationStatus', (status) => ({
+export const updateAuthorizationStatus = createAction('user/updateAuthorizationStatus', (status: AuthorizationStatus) => ({
   payload: status
+}));
+
+export const loadUserData = createAction('user/loadUserData', (user: UserData) => ({
+  payload: user
 }));
