@@ -23,13 +23,13 @@ export const fetchFilms = createAsyncThunk<void, undefined, {
   }
 );
 
-export const getLoginRequest = createAsyncThunk<void, undefined, {
+export const getAuthorizationStatus = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }
 >(
-  'login/getLoginRequest',
+  'login/getAuthorizationStatus',
   async (_arg, {dispatch, extra: api}) => {
     await api.get(APIRoute.Login)
       .catch((error) => {
