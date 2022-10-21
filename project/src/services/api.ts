@@ -1,5 +1,6 @@
 
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { errorHandler } from './errorHandler';
 import { getUser } from './user';
 
 const BASE_URL = 'https://10.react.pages.academy/wtw';
@@ -20,6 +21,17 @@ export const createAPI = (): AxiosInstance => {
 
     return config;
   });
+
+  api.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError) => {
+      if (error.response) {
+        errorHandler(error.response.data.error);
+      }
+
+      throw error;
+    }
+  );
 
   return api;
 };

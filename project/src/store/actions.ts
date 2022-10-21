@@ -8,7 +8,7 @@ export const changeGenre = createAction('main/changeGenre', (genre: Genre) => ({
   payload: genre
 }));
 
-export const sortFilmsByGenre = createAction('main/sortFilmsByGenre');
+export const sortFilmsByGenre = createAction<void>('main/sortFilmsByGenre');
 
 export const loadFilms = createAction('data/loadFilms', (films: Film[]) => ({
   payload: films
@@ -28,4 +28,8 @@ export const updateAuthorizationStatus = createAction('user/updateAuthorizationS
 
 export const loadUserData = createAction('user/loadUserData', (user: UserData | null) => ({
   payload: user
+}));
+
+export const setError = createAction('error/setError', (error: string | null) => ({
+  payload: error
 }));

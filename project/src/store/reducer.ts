@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Genre } from '../const';
-import { changeGenre, sortFilmsByGenre, loadFilms, loadPromoFilm, setLoadingStatus, updateAuthorizationStatus, loadUserData } from './actions';
+import { changeGenre, sortFilmsByGenre, loadFilms, loadPromoFilm, setLoadingStatus, updateAuthorizationStatus, loadUserData, setError } from './actions';
 import { Film } from '../types/film';
 import { UserData } from '../types/userData';
 import { AuthorizationStatus } from '../const';
@@ -14,7 +14,10 @@ type stateType = {
   isLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
+  error: string | null;
 }
+
+const user = getUser();
 
 const initialState: stateType = {
   genre: Genre.AllGenres,
@@ -22,8 +25,9 @@ const initialState: stateType = {
   promoFilm: null,
   favouriteFilms: [],
   isLoading: true,
-  authorizationStatus: getUser() ? AuthorizationStatus.Auth : AuthorizationStatus.Unknown,
-  user: getUser()
+  authorizationStatus: user ? AuthorizationStatus.Auth : AuthorizationStatus.Unknown,
+  user,
+  error: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -56,5 +60,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadUserData, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });

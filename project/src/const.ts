@@ -1,5 +1,7 @@
 export const NUMBER_OF_FILMS = 8;
 
+export const TIMEOUT_SHOW_ERROR = 4000;
+
 export enum AppRoute {
   Login = '/login',
   MyList = '/mylist',
