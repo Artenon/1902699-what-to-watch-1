@@ -1,12 +1,15 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Logo from '../../components/logo/logo';
+import { AuthorizationStatus } from '../../const';
 import { loginAction } from '../../store/api-actions';
 
 function SignIn() : JSX.Element {
   const dispatch = useAppDispatch();
+  const {authorizationStatus} = useAppSelector((state) => state);
   const navigate = useNavigate();
+
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -21,6 +24,12 @@ function SignIn() : JSX.Element {
       navigate('/');
     }
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="user-page">
