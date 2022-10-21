@@ -19,3 +19,7 @@ export const loadPromoFilm = createAction('data/loadPromoFilm', (film: Film) => 
 export const setLoadingStatus = createAction('data/setLoadingStatus', (status: boolean) => ({
   payload: status
 }));
+
+export const updateAuthorizationStatus = createAction('login/updateAuthorizationStatus', (status) => ({
+  payload: status
+}));

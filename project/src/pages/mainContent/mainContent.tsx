@@ -2,19 +2,13 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import PromoFilmCard from '../../components/promoFilmCard/promoFilmCard';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
-import { Film } from '../../types/film';
 import Logo from '../../components/logo/logo';
-import ListOfGenres from '../../components/ListOfGenres/ListOfGenres';
+import ListOfGenres from '../../components/listOfGenres/ListOfGenres';
 import ShowMoreButton from '../../components/showMoreButton/showMoreButton';
 
-type MainContentProps = {
-  films: Film[];
-  promoFilm: Film | null;
-}
-
-function MainContent({films, promoFilm}: MainContentProps): JSX.Element | null {
+function MainContent(): JSX.Element | null {
   const [numberOfFilms, setNumberOfFilms] = useState(8);
-  const currentGenre = useAppSelector((state) => state.genre);
+  const {genre, listOfFilms, promoFilm} = useAppSelector((state) => state);
 
   if (!promoFilm) {
     return null;
@@ -54,14 +48,14 @@ function MainContent({films, promoFilm}: MainContentProps): JSX.Element | null {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ListOfGenres currentGenre={currentGenre} setNumberOfFilms={setNumberOfFilms} />
+          <ListOfGenres currentGenre={genre} onSetNumberOfFilms={setNumberOfFilms} />
 
           <div className="catalog__films-list">
-            <ListOfFilms films={films.slice(0, numberOfFilms)} />
+            <ListOfFilms films={listOfFilms.slice(0, numberOfFilms)} />
           </div>
 
           {
-            films.length > numberOfFilms && <ShowMoreButton setNumberOfFilms={setNumberOfFilms} />
+            listOfFilms.length > numberOfFilms && <ShowMoreButton onSetNumberOfFilms={setNumberOfFilms} />
           }
         </section>
 

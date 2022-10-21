@@ -1,12 +1,10 @@
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 
-type MyListProps = {
-  favouriteFilms: Film[];
-}
+function MyList(): JSX.Element {
+  const {favouriteFilms} = useAppSelector((state) => state);
 
-function MyList({favouriteFilms}: MyListProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

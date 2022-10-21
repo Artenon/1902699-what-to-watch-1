@@ -1,3 +1,5 @@
+export const NUMBER_OF_FILMS = 8;
+
 export enum AppRoute {
   Login = '/login',
   MyList = '/mylist',

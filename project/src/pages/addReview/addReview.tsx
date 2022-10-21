@@ -1,16 +1,14 @@
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
 import NotFound from '../notFound/notFound';
 import FormReview from '../../components/formReview/formReview';
 
-type AddReviewProps = {
-  films: Film[]
-};
+function AddReview(): JSX.Element {
+  const {listOfFilms} = useAppSelector((state) => state);
 
-function AddReview({films}: AddReviewProps): JSX.Element {
   const {filmId} = useParams();
-  const film = films.find((e) => e.id === Number(filmId));
+  const film = listOfFilms.find((e) => e.id === Number(filmId));
 
   if (film === undefined) {
     return <NotFound />;

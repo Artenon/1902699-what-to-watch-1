@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
 import NotFound from '../notFound/notFound';
 import Tabs from '../../components/tabs/tabs';
 import { Tab } from '../../const';
@@ -10,15 +10,12 @@ import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movi
 import { similarFilms } from '../../mocks/similarFilms';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 
-type MoviePageProps = {
-  films: Film[];
-};
-
-function MoviePage({films}: MoviePageProps): JSX.Element {
+function MoviePage(): JSX.Element {
+  const {listOfFilms} = useAppSelector((state) => state);
   const [activeTab, setActiveTab] = useState(Tab.Overview);
 
   const {filmId} = useParams();
-  const film = films.find((e) => e.id === Number(filmId));
+  const film = listOfFilms.find((e) => e.id === Number(filmId));
 
   if (film === undefined) {
     return <NotFound />;
