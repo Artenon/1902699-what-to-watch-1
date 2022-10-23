@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import HistoryRouter from '../historyRouter/historyRouter';
+import { browserHistory } from '../../browserHistory';
 import { useAppSelector } from '../../hooks';
 import MainContent from '../../pages/mainContent/mainContent';
 import NotFound from '../../pages/notFound/notFound';
@@ -20,7 +22,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <ScrollToTop />
       <Routes>
         <Route path='/'>
@@ -45,7 +47,7 @@ function App(): JSX.Element {
         </Route>
         <Route path='*' element={ <NotFound /> } />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

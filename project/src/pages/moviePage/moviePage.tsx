@@ -9,6 +9,7 @@ import { comments } from '../../mocks/comments';
 import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movieTabs';
 import { similarFilms } from '../../mocks/similarFilms';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
+import LoginBlock from '../../components/loginBlock/loginBlock';
 
 function MoviePage(): JSX.Element {
   const {listOfFilms} = useAppSelector((state) => state);
@@ -38,16 +39,7 @@ function MoviePage(): JSX.Element {
           <header className="page-header film-card__head">
             <Logo isLinkLight={false} />
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href='/' className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <LoginBlock />
           </header>
 
           <div className="film-card__wrap">

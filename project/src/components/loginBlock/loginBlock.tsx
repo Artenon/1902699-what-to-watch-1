@@ -18,7 +18,7 @@ function LoginBlock(): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <Link to='/' className="user-block__link" onClick={() => dispatch(logoutAction())}>Sign out</Link>
+              <Link to={AppRoute.Login} className="user-block__link" onClick={() => dispatch(logoutAction())}>Sign out</Link>
             </li>
           </>
           :

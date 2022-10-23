@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Genre } from '../const';
+import { AppRoute, Genre } from '../const';
 import { Film } from '../types/film';
 import { UserData } from '../types/userData';
 import { AuthorizationStatus } from '../const';
@@ -30,6 +30,6 @@ export const loadUserData = createAction('user/loadUserData', (user: UserData | 
   payload: user
 }));
 
-export const setError = createAction('error/setError', (error: string | null) => ({
-  payload: error
+export const redirect = createAction('main/redirect', (route: AppRoute) => ({
+  payload: route
 }));

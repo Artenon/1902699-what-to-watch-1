@@ -1,13 +1,14 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { loadFilms, loadPromoFilm, setLoadingStatus, updateAuthorizationStatus, loadUserData, setError } from './actions';
+import { toast } from 'react-toastify';
+import { loadFilms, loadPromoFilm, setLoadingStatus, updateAuthorizationStatus, loadUserData, redirect } from './actions';
 import { AppDispatch, State } from '../types/state';
 import { Film } from '../types/film';
 import { AuthData } from '../types/authData';
 import { UserData } from '../types/userData';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { saveUser, removeUser } from '../services/user';
-import { store } from '.';
+import { toastifyOptions } from '../const';
 
 export const fetchFilms = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -58,6 +59,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveUser(data);
     dispatch(updateAuthorizationStatus(AuthorizationStatus.Auth));
     dispatch(loadUserData(data));
+    dispatch(redirect(AppRoute.Main));
+    toast.success('You have logged in!', toastifyOptions);
   }
 );
 
@@ -73,12 +76,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     removeUser();
     dispatch(updateAuthorizationStatus(AuthorizationStatus.NoAuth));
     dispatch(loadUserData(null));
+    dispatch(redirect(AppRoute.Login));
+    toast.error('You have logged out!', toastifyOptions);
   }
 );
-
-export const cleanError = createAsyncThunk('user/cleanError', () => {
-  setTimeout(() => {
-    store.dispatch(setError(null));
-  },
-  TIMEOUT_SHOW_ERROR);
-});

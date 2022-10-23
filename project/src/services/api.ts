@@ -1,7 +1,8 @@
 
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { errorHandler } from './errorHandler';
+import { toast } from 'react-toastify';
 import { getUser } from './user';
+import { toastifyOptions } from '../const';
 
 const BASE_URL = 'https://10.react.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
@@ -26,7 +27,7 @@ export const createAPI = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError) => {
       if (error.response) {
-        errorHandler(error.response.data.error);
+        toast.warn(error.response.data.error, toastifyOptions);
       }
 
       throw error;
