@@ -15,7 +15,12 @@ import LoadingScreen from '../loadingScreen/loadingScreen';
 function MoviePage(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const {currentFilm, comments, similarFilms, authorizationStatus} = useAppSelector((state) => state);
+  const {currentFilm} = useAppSelector((state) => state);
+  const {comments} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector((state) => state);
+  const {similarFilms} = useAppSelector((state) => state);
+
+
   const [activeTab, setActiveTab] = useState(Tab.Overview);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

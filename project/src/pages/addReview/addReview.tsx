@@ -10,13 +10,16 @@ import LoginBlock from '../../components/loginBlock/loginBlock';
 
 function AddReview(): JSX.Element {
   const dispatch = useAppDispatch();
-  const {currentFilm, authorizationStatus} = useAppSelector((state) => state);
+
+  const {currentFilm} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector((state) => state);
+
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.NoAuth) {
       dispatch(redirect(AppRoute.Main));
     }
-  }, []);
+  }, [authorizationStatus, dispatch]);
 
   if (!currentFilm) {
     return <NotFound />;

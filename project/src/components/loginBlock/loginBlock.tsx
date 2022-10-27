@@ -4,7 +4,9 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
 function LoginBlock(): JSX.Element {
-  const {authorizationStatus, user} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector((state) => state);
+  const {user} = useAppSelector((state) => state);
+
   const dispatch = useAppDispatch();
 
   return (

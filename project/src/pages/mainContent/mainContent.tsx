@@ -10,7 +10,10 @@ import { NUMBER_OF_FILMS } from '../../const';
 
 function MainContent(): JSX.Element | null {
   const [numberOfFilms, setNumberOfFilms] = useState(NUMBER_OF_FILMS);
-  const {genre, listOfFilms, promoFilm} = useAppSelector((state) => state);
+  const {genre} = useAppSelector((state) => state);
+  const {promoFilm} = useAppSelector((state) => state);
+  const {listOfFilms} = useAppSelector((state) => state);
+
 
   if (!promoFilm) {
     return null;
