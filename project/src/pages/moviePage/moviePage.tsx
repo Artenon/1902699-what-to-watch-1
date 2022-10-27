@@ -9,34 +9,23 @@ import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movi
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import LoginBlock from '../../components/loginBlock/loginBlock';
 import { useAppDispatch } from '../../hooks';
-import { fetchFilmById, fetchSimilarFilmsById, fetchCommentsById } from '../../store/api-actions';
-import LoadingScreen from '../loadingScreen/loadingScreen';
+import { fetchFilmById } from '../../store/api-actions';
 
 function MoviePage(): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const filmId = String(useParams().filmId);
 
   const {currentFilm} = useAppSelector((state) => state);
   const {comments} = useAppSelector((state) => state);
   const {authorizationStatus} = useAppSelector((state) => state);
   const {similarFilms} = useAppSelector((state) => state);
 
-
-  const [activeTab, setActiveTab] = useState(Tab.Overview);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const filmId = String(useParams<string>().filmId);
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);
 
   useEffect(() => {
-    setIsLoading(true);
     dispatch(fetchFilmById(filmId));
-    dispatch(fetchCommentsById(filmId));
-    dispatch(fetchSimilarFilmsById(filmId));
-    setIsLoading(false);
   }, [dispatch, filmId]);
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
 
   if (!currentFilm) {
     return <NotFound />;

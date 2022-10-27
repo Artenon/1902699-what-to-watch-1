@@ -31,6 +31,7 @@ export const fetchFilms = createAsyncThunk<void, undefined, {
 >(
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
+    dispatch(setLoadingStatus(true));
     const films = await api.get<Film[]>(APIRoute.Films);
     dispatch(loadFilms(films.data));
 
@@ -50,7 +51,13 @@ export const fetchFilmById = createAsyncThunk<void, string, {
   'data/fetchFilmById',
   async (filmId, {dispatch, extra: api}) => {
     const {data} = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
+    dispatch(setLoadingStatus(true));
+
     dispatch(loadCurrentFilm(data));
+    dispatch(fetchCommentsById(filmId));
+    dispatch(fetchSimilarFilmsById(filmId));
+
+    dispatch(setLoadingStatus(false));
   }
 );
 
