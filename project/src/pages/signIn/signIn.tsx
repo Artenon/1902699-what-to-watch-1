@@ -4,10 +4,11 @@ import Logo from '../../components/logo/logo';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import { loginAction } from '../../store/api-actions';
 import { redirect } from '../../store/actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function SignIn() : JSX.Element {
   const dispatch = useAppDispatch();
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -27,7 +28,7 @@ function SignIn() : JSX.Element {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(redirect(AppRoute.Main));
     }
-  }, []);
+  }, [authorizationStatus, dispatch]);
 
   return (
     <div className="user-page">

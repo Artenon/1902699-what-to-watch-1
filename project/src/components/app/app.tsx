@@ -12,12 +12,14 @@ import Player from '../../pages/player/player';
 import PrivateRoute from '../privateRoute/privateRoute';
 import { AppRoute } from '../../const';
 import ScrollToTop from '../scrollToTop/scrollToTop';
+import { AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import LoadingScreen from '../../pages/loadingScreen/loadingScreen';
 
 function App(): JSX.Element {
-  const {isLoading} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  if (isLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <LoadingScreen />;
   }
 

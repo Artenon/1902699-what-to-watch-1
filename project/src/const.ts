@@ -64,3 +64,8 @@ export enum APIRoute {
   Logout = '/logout',
   Similar = '/similar'
 }
+
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+}

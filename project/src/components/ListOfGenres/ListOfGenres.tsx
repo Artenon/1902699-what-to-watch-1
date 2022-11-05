@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
 import { GenresObj, Genre } from '../../const';
-import { useAppDispatch } from '../../hooks';
-import { changeGenre, sortFilmsByGenre } from '../../store/actions';
 import { NUMBER_OF_FILMS } from '../../const';
 
 type ListOfGenresProps = {
@@ -10,7 +8,6 @@ type ListOfGenresProps = {
 }
 
 function ListOfGenres({currentGenre, onSetNumberOfFilms}: ListOfGenresProps): JSX.Element {
-  const dispatch = useAppDispatch();
   const namesOfGenres = Object.keys(GenresObj);
   const genres = Object.values(GenresObj);
   return (
@@ -25,8 +22,6 @@ function ListOfGenres({currentGenre, onSetNumberOfFilms}: ListOfGenresProps): JS
               className="catalog__genres-link"
               style={{cursor: 'pointer'}}
               onClick={() => {
-                dispatch(changeGenre(genres[index]));
-                dispatch(sortFilmsByGenre());
                 onSetNumberOfFilms(NUMBER_OF_FILMS);
               }}
             >

@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Logo from '../../components/logo/logo';
 import { useAppSelector, useAppDispatch } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getCurrentFilm } from '../../store/film-data/selectors';
 import { redirect } from '../../store/actions';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import NotFound from '../notFound/notFound';
@@ -11,8 +13,8 @@ import LoginBlock from '../../components/loginBlock/loginBlock';
 function AddReview(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const {currentFilm} = useAppSelector((state) => state);
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
 
   useEffect(() => {

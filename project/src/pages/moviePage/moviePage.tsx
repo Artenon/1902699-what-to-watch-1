@@ -1,31 +1,38 @@
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Logo from '../../components/logo/logo';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import NotFound from '../notFound/notFound';
 import Tabs from '../../components/tabs/tabs';
 import { Tab, AuthorizationStatus, AppRoute } from '../../const';
 import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movieTabs';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import LoginBlock from '../../components/loginBlock/loginBlock';
-import { useAppDispatch } from '../../hooks';
 import { fetchFilmById } from '../../store/api-actions';
+import { getSimilarFilms, getComments, getCurrentFilm, getLoadingStatus } from '../../store/film-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import LoadingScreen from '../loadingScreen/loadingScreen';
 
 function MoviePage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const filmId = String(useParams().filmId);
 
-  const {currentFilm} = useAppSelector((state) => state);
-  const {comments} = useAppSelector((state) => state);
-  const {authorizationStatus} = useAppSelector((state) => state);
-  const {similarFilms} = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const comments = useAppSelector(getComments);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const isLoading = useAppSelector(getLoadingStatus);
 
   const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);
 
   useEffect(() => {
     dispatch(fetchFilmById(filmId));
   }, [dispatch, filmId]);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   if (!currentFilm) {
     return <NotFound />;

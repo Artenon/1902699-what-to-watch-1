@@ -1,20 +1,26 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
+import { getGenre, getPromoFilm, getFilms, getLoadingStatus } from '../../store/film-data/selectors';
 import PromoFilmCard from '../../components/promoFilmCard/promoFilmCard';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import Logo from '../../components/logo/logo';
-import ListOfGenres from '../../components/listOfGenres/ListOfGenres';
+import ListOfGenres from '../../components/ListOfGenres/ListOfGenres';
 import ShowMoreButton from '../../components/showMoreButton/showMoreButton';
 import LoginBlock from '../../components/loginBlock/loginBlock';
 import { NUMBER_OF_FILMS } from '../../const';
+import LoadingScreen from '../loadingScreen/loadingScreen';
 
 function MainContent(): JSX.Element | null {
   const [numberOfFilms, setNumberOfFilms] = useState(NUMBER_OF_FILMS);
 
-  const {genre} = useAppSelector((state) => state);
-  const {promoFilm} = useAppSelector((state) => state);
-  const {listOfFilms} = useAppSelector((state) => state);
+  const genre = useAppSelector(getGenre);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const listOfFilms = useAppSelector(getFilms);
+  const isLoading = useAppSelector(getLoadingStatus);
 
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   if (!promoFilm) {
     return null;
