@@ -9,7 +9,7 @@ import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movi
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import LoginBlock from '../../components/loginBlock/loginBlock';
 import { fetchFilmById } from '../../store/api-actions';
-import { getSimilarFilms, getComments, getCurrentFilm, getLoadingStatus } from '../../store/film-data/selectors';
+import { getSimilarFilms, getComments, getCurrentFilm, getLoadingStatus } from '../../store/current-film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import LoadingScreen from '../loadingScreen/loadingScreen';
 

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Logo from '../../components/logo/logo';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getCurrentFilm } from '../../store/film-data/selectors';
+import { getCurrentFilm } from '../../store/current-film-data/selectors';
 import { redirect } from '../../store/actions';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import NotFound from '../notFound/notFound';

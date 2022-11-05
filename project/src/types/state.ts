@@ -18,13 +18,11 @@ export type FilmData = {
   listOfFilms: Film[];
   promoFilm: Film | null;
   favouriteFilms: Film[];
-  currentFilm: Film | null;
-  comments: Comment[];
-  similarFilms: Film[];
 }
 
 export type CurrentFilmData = {
-  currentFilm: Film | null;
+  isLoading: boolean;
+  film: Film | null;
   comments: Comment[];
   similarFilms: Film[];
 }

@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAppDispatch } from '../../hooks';
 import { useAppSelector } from '../../hooks';
 import { getGenre, getPromoFilm, getFilms, getLoadingStatus } from '../../store/film-data/selectors';
+import { fetchFilms } from '../../store/api-actions';
 import PromoFilmCard from '../../components/promoFilmCard/promoFilmCard';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import Logo from '../../components/logo/logo';
@@ -11,12 +13,17 @@ import { NUMBER_OF_FILMS } from '../../const';
 import LoadingScreen from '../loadingScreen/loadingScreen';
 
 function MainContent(): JSX.Element | null {
+  const dispatch = useAppDispatch();
   const [numberOfFilms, setNumberOfFilms] = useState(NUMBER_OF_FILMS);
 
   const genre = useAppSelector(getGenre);
   const promoFilm = useAppSelector(getPromoFilm);
   const listOfFilms = useAppSelector(getFilms);
   const isLoading = useAppSelector(getLoadingStatus);
+
+  useEffect(() => {
+    dispatch(fetchFilms());
+  }, [dispatch]);
 
   if (isLoading) {
     return <LoadingScreen />;
