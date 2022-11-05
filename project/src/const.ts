@@ -29,31 +29,7 @@ export enum Tab {
   Reviews = 'Reviews'
 }
 
-export enum Genre {
-  AllGenres = 'AllGenres',
-  Comedy = 'Comedy',
-  Crime = 'Crime',
-  Documentary = 'Documentary',
-  Drama = 'Drama',
-  Horror = 'Horror',
-  KidsAndFamily = 'KidsAndFamily',
-  Romance = 'Romance',
-  SciFi = 'SciFi',
-  Thriller = 'Thriller'
-}
-
-export const GenresObj = {
-  'All genres': Genre.AllGenres,
-  'Comedies': Genre.Comedy,
-  'Crime': Genre.Crime,
-  'Documentary': Genre.Documentary,
-  'Dramas': Genre.Drama,
-  'Horror': Genre.Horror,
-  'Kids & Family': Genre.KidsAndFamily,
-  'Romance': Genre.Romance,
-  'Sci-Fi': Genre.SciFi,
-  'Thrillers': Genre.Thriller
-};
+export const AllGenres = 'All Genres';
 
 export enum APIRoute {
   Films = '/films',

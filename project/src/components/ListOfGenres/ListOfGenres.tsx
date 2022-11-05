@@ -1,31 +1,35 @@
 import { Dispatch, SetStateAction } from 'react';
-import { GenresObj, Genre } from '../../const';
 import { NUMBER_OF_FILMS } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCurrentGenre } from '../../store/film-data/film-data';
+import { getGenres, getCurrentGenre } from '../../store/film-data/selectors';
 
 type ListOfGenresProps = {
-  currentGenre: Genre;
   onSetNumberOfFilms: Dispatch<SetStateAction<number>>;
 }
 
-function ListOfGenres({currentGenre, onSetNumberOfFilms}: ListOfGenresProps): JSX.Element {
-  const namesOfGenres = Object.keys(GenresObj);
-  const genres = Object.values(GenresObj);
+function ListOfGenres({onSetNumberOfFilms}: ListOfGenresProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const currentGenre = useAppSelector(getCurrentGenre);
+  const genres = useAppSelector(getGenres);
+
   return (
     <ul className="catalog__genres-list">
       {
-        namesOfGenres.map((name, index) => (
+        genres.map((genre, index) => (
           <li
-            key={`${name}`}
-            className={`catalog__genres-item ${currentGenre === genres[index] && 'catalog__genres-item--active'}`}
+            key={`${genre}`}
+            className={`catalog__genres-item ${genre === currentGenre && 'catalog__genres-item--active'}`}
           >
             <div
               className="catalog__genres-link"
               style={{cursor: 'pointer'}}
               onClick={() => {
                 onSetNumberOfFilms(NUMBER_OF_FILMS);
+                dispatch(changeCurrentGenre(genre));
               }}
             >
-              {name}
+              {genre}
             </div>
           </li>
         ))
