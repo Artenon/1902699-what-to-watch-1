@@ -42,7 +42,7 @@ function MoviePage(): JSX.Element {
     setActiveTab(tab);
   };
 
-  const {name, backgroundColor, backgroundImage, genre, released, posterImage, starring, director, description, rating, runTime} = currentFilm;
+  const {name, backgroundColor, backgroundImage, genre, released, posterImage, starring, director, description, rating, runTime, scoresCount} = currentFilm;
 
   return (
     <>
@@ -107,6 +107,7 @@ function MoviePage(): JSX.Element {
                   description={description}
                   director={director}
                   starring={starring}
+                  scoresCount={scoresCount}
                 />}
 
               {activeTab === Tab.Details &&
