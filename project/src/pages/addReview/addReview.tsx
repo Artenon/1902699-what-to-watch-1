@@ -16,7 +16,6 @@ function AddReview(): JSX.Element {
   const currentFilm = useAppSelector(getCurrentFilm);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.NoAuth) {
       dispatch(redirect(AppRoute.Main));
@@ -47,7 +46,7 @@ function AddReview(): JSX.Element {
                 <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link className="breadcrumbs__link" to='#'>Add review</Link>
               </li>
             </ul>
           </nav>

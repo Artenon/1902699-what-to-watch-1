@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { toast } from 'react-toastify';
+import { NameSpace, toastifyOptions } from '../../const';
 import { CurrentFilmData } from '../../types/state';
 import {
   fetchFilmById,
@@ -40,6 +41,9 @@ export const currentFilmData = createSlice({
       .addCase(postComment.fulfilled, (state, action) => {
         state.comments = action.payload;
         state.isLoading = false;
+      })
+      .addCase(postComment.rejected, () => {
+        toast.error('Couldn\'t post your review', toastifyOptions);
       });
   }
 });
