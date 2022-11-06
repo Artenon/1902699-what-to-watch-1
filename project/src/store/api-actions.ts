@@ -11,6 +11,7 @@ import { PostCommentData } from '../types/postCommentData';
 import { APIRoute, AppRoute } from '../const';
 import { saveUser, removeUser } from '../services/user';
 import { toastifyOptions } from '../const';
+import { NameSpace } from '../const';
 
 export const fetchFilms = createAsyncThunk<Film[], undefined, {
   dispatch: AppDispatch,
@@ -18,7 +19,7 @@ export const fetchFilms = createAsyncThunk<Film[], undefined, {
   extra: AxiosInstance
 }
 >(
-  'DATA/fetchFilms',
+  `${NameSpace.MainPage}/fetchFilms`,
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Film[]>(APIRoute.Films);
     dispatch(fetchPromoFilm());
@@ -32,7 +33,7 @@ export const fetchPromoFilm = createAsyncThunk<Film, undefined, {
   extra: AxiosInstance
 }
 >(
-  'DATA/fetchPromoFilm',
+  `${NameSpace.MainPage}/fetchPromoFilm`,
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Film>(APIRoute.Promo);
     return data;
@@ -45,7 +46,7 @@ export const fetchFilmById = createAsyncThunk<Film, string, {
   extra: AxiosInstance
 }
 >(
-  'CURRENT_FILM/fetchFilmById',
+  `${NameSpace.CurrentFilm}/fetchFilmById`,
   async (filmId, {dispatch, extra: api}) => {
     const {data} = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
     dispatch(fetchCommentsById(filmId));
@@ -60,7 +61,7 @@ export const fetchCommentsById = createAsyncThunk<Comment[], string, {
   extra: AxiosInstance
 }
 >(
-  'CURRENT_FILM/fetchCommentsById',
+  `${NameSpace.CurrentFilm}/fetchCommentsById`,
   async (filmId, {dispatch, extra: api}) => {
     const {data} = await api.get<Comment[]>(`${APIRoute.Comments}/${filmId}`);
     return data;
@@ -73,9 +74,22 @@ export const fetchSimilarFilmsById = createAsyncThunk<Film[], string, {
   extra: AxiosInstance
 }
 >(
-  'CURRENT_FILM/fetchSimilarFilmsById',
+  `${NameSpace.CurrentFilm}/fetchSimilarFilmsById`,
   async (filmId, {dispatch, extra: api}) => {
     const {data} = await api.get<Film[]>(`${APIRoute.Films}/${filmId}${APIRoute.Similar}`);
+    return data;
+  }
+);
+
+export const postComment = createAsyncThunk<Comment[], PostCommentData, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}
+>(
+  `${NameSpace.CurrentFilm}/postComment`,
+  async ({filmId, comment, rating}, {dispatch, extra: api}) => {
+    const {data} = await api.post<Comment[]>(`${APIRoute.Comments}/${filmId}`, {comment, rating});
     return data;
   }
 );
@@ -86,7 +100,7 @@ export const getAuthorizationStatus = createAsyncThunk<void, undefined, {
   extra: AxiosInstance
 }
 >(
-  'USER/getAuthorizationStatus',
+  `${NameSpace.User}/getAuthorizationStatus`,
   async (_arg, {dispatch, extra: api}) => {
     await api.get(APIRoute.Login);
   }
@@ -98,7 +112,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   extra: AxiosInstance
 }
 >(
-  'USER/login',
+  `${NameSpace.User}/login`,
   async ({email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveUser(data);
@@ -115,24 +129,11 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance
 }
 >(
-  'USER/logout',
+  `${NameSpace.User}/logout`,
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     removeUser();
     dispatch(redirect(AppRoute.Login));
     toast.error('You have logged out!', toastifyOptions);
-  }
-);
-
-export const postComment = createAsyncThunk<Comment[], PostCommentData, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}
->(
-  'CURRENT_FILM/postComment',
-  async ({filmId, comment, rating}, {dispatch, extra: api}) => {
-    const {data} = await api.post<Comment[]>(`${APIRoute.Comments}/${filmId}`, {comment, rating});
-    return data;
   }
 );

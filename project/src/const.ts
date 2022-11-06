@@ -42,7 +42,7 @@ export enum APIRoute {
 }
 
 export enum NameSpace {
-  Data = 'DATA',
+  MainPage = 'MAIN_PAGE',
   User = 'USER',
   CurrentFilm = 'CURRENT_FILM'
 }
