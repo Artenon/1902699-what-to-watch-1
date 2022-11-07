@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import { NUMBER_OF_FILMS } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCurrentGenre } from '../../store/film-data/film-data';
-import { getGenres, getCurrentGenre } from '../../store/film-data/selectors';
+import { changeCurrentGenre } from '../../store/main-data/main-data';
+import { getGenres, getCurrentGenre } from '../../store/main-data/selectors';
 
 type ListOfGenresProps = {
   onSetNumberOfFilms: Dispatch<SetStateAction<number>>;

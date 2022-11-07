@@ -10,7 +10,7 @@ import {
 } from '../api-actions';
 
 const initialState: CurrentFilmData = {
-  isLoading: true,
+  isLoading: false,
   film: null,
   comments: [],
   similarFilms: []

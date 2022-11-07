@@ -137,3 +137,36 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     toast.error('You have logged out!', toastifyOptions);
   }
 );
+
+export const getMyList = createAsyncThunk<Film[], undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}
+>(
+  `${NameSpace.User}/getMyList`,
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Film[]>(APIRoute.Favorite);
+    return data;
+  }
+);
+
+type changeFavoriteFilmStatusProps = {
+  filmId: string;
+  status: number;
+}
+
+export const changeFavoriteFilmStatus = createAsyncThunk<void, changeFavoriteFilmStatusProps, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}
+>(
+  `${NameSpace.User}/changeFavoriteFilmStatus`,
+  async ({filmId, status}, {dispatch, extra: api}) => {
+    await api.post<Film>(`${APIRoute.Favorite}/${filmId}/${status}`);
+    dispatch(getMyList());
+    dispatch(fetchFilms());
+    dispatch(fetchFilmById(filmId));
+  }
+);

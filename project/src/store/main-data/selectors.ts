@@ -10,8 +10,6 @@ export const getFilms = (state: State): Film[] => state[NameSpace.MainPage].list
 
 export const getPromoFilm = (state: State): Film | null => state[NameSpace.MainPage].promoFilm;
 
-export const getFavouriteFilms = (state: State): Film[] => state[NameSpace.MainPage].favouriteFilms;
-
 export const getCurrentGenre = (state: State): string => state[NameSpace.MainPage].currentGenre;
 
 export const getGenres = (state: State): string[] => state[NameSpace.MainPage].genres;

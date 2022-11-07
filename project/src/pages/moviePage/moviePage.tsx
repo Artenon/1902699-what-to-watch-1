@@ -8,9 +8,9 @@ import { Tab, AuthorizationStatus, AppRoute } from '../../const';
 import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movieTabs';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import LoginBlock from '../../components/loginBlock/loginBlock';
-import { fetchFilmById } from '../../store/api-actions';
+import { fetchFilmById, changeFavoriteFilmStatus } from '../../store/api-actions';
 import { getSimilarFilms, getComments, getCurrentFilm, getLoadingStatus } from '../../store/current-film-data/selectors';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getAuthorizationStatus, getFavouriteFilms } from '../../store/user-process/selectors';
 import LoadingScreen from '../loadingScreen/loadingScreen';
 
 function MoviePage(): JSX.Element {
@@ -19,6 +19,7 @@ function MoviePage(): JSX.Element {
   const filmId = String(useParams().filmId);
 
   const currentFilm = useAppSelector(getCurrentFilm);
+  const favoriteFilms = useAppSelector(getFavouriteFilms);
   const comments = useAppSelector(getComments);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const similarFilms = useAppSelector(getSimilarFilms);
@@ -40,6 +41,15 @@ function MoviePage(): JSX.Element {
 
   const onTab = (tab: Tab) => {
     setActiveTab(tab);
+  };
+
+  const onMyListButton = () => {
+    let status: number;
+
+    if (currentFilm.isFavorite) { status = 0; }
+    else { status = 1; }
+
+    dispatch(changeFavoriteFilmStatus({filmId, status}));
   };
 
   const {name, backgroundColor, backgroundImage, genre, released, posterImage, starring, director, description, rating, runTime, scoresCount} = currentFilm;
@@ -75,16 +85,23 @@ function MoviePage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
                 {
                   authorizationStatus === AuthorizationStatus.Auth
-                    ? <Link to={`${AppRoute.Films}/${filmId}${AppRoute.Review}`} className="btn film-card__button">Add review</Link>
+                    ?
+                    <>
+                      <button className="btn btn--list film-card__button" type="button" onClick={() => onMyListButton()}>
+                        <svg viewBox="0 0 19 20" width="19" height="20">
+                          {
+                            currentFilm.isFavorite
+                              ? <use xlinkHref="#in-list"></use>
+                              : <use xlinkHref="#add"></use>
+                          }
+                        </svg>
+                        <span>My list</span>
+                        <span className="film-card__count">{favoriteFilms.length}</span>
+                      </button>
+                      <Link to={`${AppRoute.Films}/${filmId}${AppRoute.Review}`} className="btn film-card__button">Add review</Link>
+                    </>
                     : null
                 }
               </div>

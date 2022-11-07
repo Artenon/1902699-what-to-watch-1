@@ -10,8 +10,7 @@ import { getFilmGenres } from '../../utils/films-genres';
 const initialState: FilmData = {
   listOfFilms: [],
   promoFilm: null,
-  favouriteFilms: [],
-  isLoading: true,
+  isLoading: false,
   currentGenre: AllGenres,
   genres: []
 };

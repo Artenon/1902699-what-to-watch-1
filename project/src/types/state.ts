@@ -7,8 +7,10 @@ import { Comment } from './comment';
 export type State = ReturnType<typeof store.getState>;
 
 export type UserProcess = {
+  isLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
+  favoriteFilms: Film[];
 }
 
 export type FilmData = {
@@ -17,7 +19,6 @@ export type FilmData = {
   isLoading: boolean;
   listOfFilms: Film[];
   promoFilm: Film | null;
-  favouriteFilms: Film[];
 }
 
 export type CurrentFilmData = {

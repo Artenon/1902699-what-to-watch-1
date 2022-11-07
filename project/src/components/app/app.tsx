@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import HistoryRouter from '../historyRouter/historyRouter';
 import { browserHistory } from '../../browserHistory';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import MainContent from '../../pages/mainContent/mainContent';
 import NotFound from '../../pages/notFound/notFound';
 import SignIn from '../../pages/signIn/signIn';
@@ -15,12 +15,19 @@ import ScrollToTop from '../scrollToTop/scrollToTop';
 import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import LoadingScreen from '../../pages/loadingScreen/loadingScreen';
+import { getMyList } from '../../store/api-actions';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <LoadingScreen />;
+  }
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const dispatch = useAppDispatch();
+    dispatch(getMyList());
   }
 
   return (
