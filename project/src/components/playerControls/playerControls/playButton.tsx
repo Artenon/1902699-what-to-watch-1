@@ -19,6 +19,12 @@ const PlayButton = ({videoRef}: PlayButtonProps): JSX.Element => {
     }
   };
 
+  if (videoRef.current) {
+    videoRef.current.addEventListener('ended', () => {
+      setIsPlaying(false);
+    });
+  }
+
   return (
     <button type="button" className="player__play" onClick={() => onPlayClick()}>
       {
