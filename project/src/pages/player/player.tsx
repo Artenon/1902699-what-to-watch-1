@@ -41,7 +41,7 @@ function Player() : JSX.Element {
 
       <button type="button" className="player__exit" onClick={() => onExitClick()}>Exit</button>
 
-      <PlayerControls videoRef={videoRef} />
+      <PlayerControls videoRef={videoRef} name={currentFilm.name} />
 
     </div>
   );
