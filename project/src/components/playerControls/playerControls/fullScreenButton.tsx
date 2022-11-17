@@ -1,8 +1,20 @@
 const FullScreenButton = (): JSX.Element => {
   const onFullScreenClick = () => {
     if (!document.fullscreenElement) {
-      const player = document.querySelector('.player');
-      player?.requestFullscreen();
+      const player = document.querySelector('.player') as HTMLElement & {
+        mozRequestFullScreen(): Promise<void>;
+        webkitRequestFullscreen(): Promise<void>;
+        msRequestFullscreen(): Promise<void>;
+      };
+      if (player.requestFullscreen) {
+        player.requestFullscreen();
+      } else if (player.webkitRequestFullscreen) {
+        player.webkitRequestFullscreen();
+      } else if (player.mozRequestFullScreen) {
+        player.mozRequestFullScreen();
+      } else if (player.msRequestFullscreen) {
+        player.msRequestFullscreen();
+      }
     } else if (document.exitFullscreen) {
       document.exitFullscreen();
     }
