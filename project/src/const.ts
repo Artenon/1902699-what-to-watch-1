@@ -1,6 +1,7 @@
 import { ToastOptions } from 'react-toastify';
 
 export const NUMBER_OF_FILMS = 8;
+export const MAX_NUMBER_OF_GENRES = 9;
 
 export const toastifyOptions: ToastOptions = {
   theme: 'colored',

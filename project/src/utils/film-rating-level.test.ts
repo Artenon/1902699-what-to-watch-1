@@ -11,7 +11,7 @@ describe('Utils: Film rating level', () => {
   });
 
   it('Should be Good', () => {
-    expect(getRatingLevel(6)).toBe(RatingLevel.Good); 
+    expect(getRatingLevel(6)).toBe(RatingLevel.Good);
   });
 
   it('Should be Normal', () => {
