@@ -16,7 +16,7 @@ function ListOfGenres({onSetNumberOfFilms}: ListOfGenresProps): JSX.Element {
   return (
     <ul className="catalog__genres-list">
       {
-        genres.map((genre, index) => (
+        genres.map((genre) => (
           <li
             key={`${genre}`}
             className={`catalog__genres-item ${genre === currentGenre && 'catalog__genres-item--active'}`}
