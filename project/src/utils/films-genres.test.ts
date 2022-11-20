@@ -11,7 +11,7 @@ describe('Utils: Films genres', () => {
   it('Simple check', () => {
     const answer: string[] = [AllGenres];
     for (let i = 0; i < 30; i++) {
-      const fakeFilm = makeFakeFilm({isGenreTheSame: false});
+      const fakeFilm = makeFakeFilm({});
       fakeFilms.push(fakeFilm);
       if (!answer.includes(fakeFilm.genre) && answer.length <= MAX_NUMBER_OF_GENRES) {
         answer.push(fakeFilm.genre);
@@ -32,7 +32,7 @@ describe('Utils: Films genres', () => {
   it('If there are a lot of films', () => {
     const answer: string[] = [AllGenres];
     for (let i = 0; i < 1000; i++) {
-      const fakeFilm = makeFakeFilm({isGenreTheSame: false});
+      const fakeFilm = makeFakeFilm({});
       fakeFilms.push(fakeFilm);
       if (!answer.includes(fakeFilm.genre) && answer.length <= MAX_NUMBER_OF_GENRES) {
         answer.push(fakeFilm.genre);
