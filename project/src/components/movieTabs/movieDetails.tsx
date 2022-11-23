@@ -10,6 +10,13 @@ type MovieDetailsProps = {
 
 function MovieDetails(props: MovieDetailsProps) {
   const {director, starring, runTime, genre, released} = props;
+
+  const getHMM = (minutes: number): string => {
+    const date = new Date(minutes * 60000).toISOString().substring(12, 16);
+    const [hours, mins] = date.split(':');
+    return `${hours}h ${mins}m`;
+  };
+
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -32,7 +39,7 @@ function MovieDetails(props: MovieDetailsProps) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{/* 1h 39m */}{runTime}</span>
+          <span className="film-card__details-value">{getHMM(runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
