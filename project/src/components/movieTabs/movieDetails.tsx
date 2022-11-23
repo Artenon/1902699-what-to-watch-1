@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 type MovieDetailsProps = {
   director: string;
   starring: string[];
@@ -29,7 +27,7 @@ function MovieDetails(props: MovieDetailsProps) {
           <span className="film-card__details-value">
             {
               starring.map((star): JSX.Element => (
-                <Fragment key={`${star}`}>{star}, <br /></Fragment>
+                <div className="starring_star" key={`${star}`}>{star}</div>
               ))
             }
           </span>
