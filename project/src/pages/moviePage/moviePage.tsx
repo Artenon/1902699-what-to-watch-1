@@ -4,8 +4,9 @@ import Logo from '../../components/logo/logo';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import NotFound from '../notFound/notFound';
 import Tabs from '../../components/tabs/tabs';
-import { Tab, AuthorizationStatus, AppRoute } from '../../const';
+import { Tab, AuthorizationStatus, AppRoute, NUMBER_OF_FILMS } from '../../const';
 import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movieTabs';
+import ShowMoreButton from '../../components/showMoreButton/showMoreButton';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import LoginBlock from '../../components/loginBlock/loginBlock';
 import { fetchFilmById, changeFavoriteFilmStatus } from '../../store/api-actions';
@@ -17,6 +18,9 @@ function MoviePage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);
+  const [numberOfFilms, setNumberOfFilms] = useState<number>(NUMBER_OF_FILMS);
+
   const filmId = String(useParams().filmId);
 
   const currentFilm = useAppSelector(getCurrentFilm);
@@ -25,8 +29,6 @@ function MoviePage(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const similarFilms = useAppSelector(getSimilarFilms);
   const isLoading = useAppSelector(getLoadingStatus);
-
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);
 
   useEffect(() => {
     dispatch(fetchFilmById(filmId));
@@ -153,8 +155,12 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <ListOfFilms films={similarFilms} />
+            <ListOfFilms films={similarFilms.slice(0, numberOfFilms)} />
           </div>
+
+          {
+            similarFilms.length > numberOfFilms && <ShowMoreButton onSetNumberOfFilms={setNumberOfFilms} />
+          }
         </section>
 
         <footer className="page-footer">
