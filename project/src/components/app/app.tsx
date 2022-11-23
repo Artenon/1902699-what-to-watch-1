@@ -47,7 +47,12 @@ function App(): JSX.Element {
           />
           <Route path={AppRoute.Films}>
             <Route path=':filmId' element={ <MoviePage /> } />
-            <Route path={`:filmId${AppRoute.Review}`} element={ <AddReview /> } />
+            <Route path={`:filmId${AppRoute.Review}`} element={
+              <PrivateRoute>
+                <AddReview />
+              </PrivateRoute>
+            }
+            />
           </Route>
           <Route path={AppRoute.Player}>
             <Route path=':filmId' element={ <Player /> } />
