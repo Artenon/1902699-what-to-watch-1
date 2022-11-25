@@ -14,7 +14,7 @@ function ListOfGenres({onSetNumberOfFilms}: ListOfGenresProps): JSX.Element {
   const genres = useAppSelector(getGenres);
 
   return (
-    <ul className="catalog__genres-list">
+    <ul className="catalog__genres-list" data-testid="genres">
       {
         genres.map((genre) => (
           <li
