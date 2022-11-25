@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import ListOfFilms from './listOfFilms';
 import { createMemoryHistory } from 'history';
+import ListOfFilms from './listOfFilms';
 import HistoryRouter from '../historyRouter/historyRouter';
 import { makeFakeFilm } from '../../utils/mocks';
 
