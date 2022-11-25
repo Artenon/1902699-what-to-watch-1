@@ -35,7 +35,7 @@ function Player() : JSX.Element {
 
   return (
     <div className="player">
-      <video className="player__video" poster={currentFilm.backgroundImage} ref={videoRef}>
+      <video className="player__video" poster={currentFilm.backgroundImage} ref={videoRef} data-testid="video">
         <source src={currentFilm.videoLink} />
       </video>
 

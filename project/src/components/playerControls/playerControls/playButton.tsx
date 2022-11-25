@@ -26,7 +26,7 @@ const PlayButton = ({videoRef}: PlayButtonProps): JSX.Element => {
   }
 
   return (
-    <button type="button" className="player__play" onClick={() => onPlayClick()}>
+    <button type="button" className="player__play" onClick={() => onPlayClick()} data-testid='play'>
       {
         isPlaying
           ?
