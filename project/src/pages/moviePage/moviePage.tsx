@@ -4,13 +4,12 @@ import Logo from '../../components/logo/logo';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import NotFound from '../notFound/notFound';
 import Tabs from '../../components/tabs/tabs';
-import { Tab, AuthorizationStatus, AppRoute, NUMBER_OF_SIMILAR_FILMS } from '../../const';
-import { MovieOverview, MovieDetails, MovieReviews } from '../../components/movieTabs';
+import { AuthorizationStatus, AppRoute, NUMBER_OF_SIMILAR_FILMS } from '../../const';
 import ShowMoreButton from '../../components/showMoreButton/showMoreButton';
 import ListOfFilms from '../../components/listOfFilms/listOfFilms';
 import LoginBlock from '../../components/loginBlock/loginBlock';
 import { fetchFilmById, changeFavoriteFilmStatus } from '../../store/api-actions';
-import { getSimilarFilms, getComments, getCurrentFilm, getLoadingStatus } from '../../store/current-film-data/selectors';
+import { getSimilarFilms, getCurrentFilm, getLoadingStatus } from '../../store/current-film-data/selectors';
 import { getAuthorizationStatus, getFavouriteFilms } from '../../store/user-process/selectors';
 import LoadingScreen from '../loadingScreen/loadingScreen';
 
@@ -18,14 +17,12 @@ function MoviePage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);
   const [numberOfFilms, setNumberOfFilms] = useState<number>(NUMBER_OF_SIMILAR_FILMS);
 
   const filmId = String(useParams().filmId);
 
   const currentFilm = useAppSelector(getCurrentFilm);
   const favoriteFilms = useAppSelector(getFavouriteFilms);
-  const comments = useAppSelector(getComments);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const similarFilms = useAppSelector(getSimilarFilms);
   const isLoading = useAppSelector(getLoadingStatus);
@@ -42,10 +39,6 @@ function MoviePage(): JSX.Element {
     return <NotFound />;
   }
 
-  const onTab = (tab: Tab) => {
-    setActiveTab(tab);
-  };
-
   const onMyListButton = () => {
     let status: number;
 
@@ -59,7 +52,7 @@ function MoviePage(): JSX.Element {
     navigate(`${AppRoute.Player}/${filmId}`);
   };
 
-  const {name, backgroundColor, backgroundImage, genre, released, posterImage, starring, director, description, rating, runTime, scoresCount} = currentFilm;
+  const {name, backgroundColor, backgroundImage, genre, released, posterImage} = currentFilm;
 
   return (
     <>
@@ -123,28 +116,7 @@ function MoviePage(): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <Tabs onTab={onTab} activeTab={activeTab} />
-
-              {activeTab === Tab.Overview &&
-                <MovieOverview
-                  rating={rating}
-                  description={description}
-                  director={director}
-                  starring={starring}
-                  scoresCount={scoresCount}
-                />}
-
-              {activeTab === Tab.Details &&
-                <MovieDetails
-                  director={director}
-                  starring={starring}
-                  runTime={runTime}
-                  genre={genre}
-                  released={released}
-                />}
-
-              {activeTab === Tab.Reviews && <MovieReviews reviews={comments} />}
-
+              <Tabs />
             </div>
           </div>
         </div>
