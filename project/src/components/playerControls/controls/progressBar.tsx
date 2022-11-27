@@ -44,7 +44,7 @@ const ProgressBar = ({videoRef}: ProgressBarProps): JSX.Element => {
   const maxProgressValue = Math.floor(videoRef.current ? videoRef.current.duration : 0);
 
   return (
-    <div className="player__controls-row">
+    <div className="player__controls-row" data-testid="progressbar">
       <div className="player__time">
         <input
           className="seek"

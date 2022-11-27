@@ -1,7 +1,7 @@
 import { MutableRefObject } from 'react';
-import ProgressBar from './playerControls/progressBar';
-import PlayButton from './playerControls/playButton';
-import FullScreenButton from './playerControls/fullScreenButton';
+import ProgressBar from './controls/progressBar';
+import PlayButton from './controls/playButton';
+import FullScreenButton from './controls/fullScreenButton';
 import './playerControls.css';
 
 type PlayerControlsProps = {
