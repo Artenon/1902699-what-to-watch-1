@@ -46,7 +46,6 @@ describe('Component: Player page', () => {
     history.push(`${AppRoute.Player}/1`);
 
     window.HTMLVideoElement.prototype.play = jest.fn();
-    window.HTMLVideoElement.prototype.pause = jest.fn();
 
     mockAPI
       .onGet(`${AppRoute.Films}/1`)
@@ -63,8 +62,6 @@ describe('Component: Player page', () => {
 
     await userEvent.click(screen.getByTestId('play'));
     expect(window.HTMLVideoElement.prototype.play).toBeCalled();
-    await userEvent.click(screen.getByTestId('play'));
-    expect(window.HTMLVideoElement.prototype.pause).toBeCalled();
   });
 
   it('Should render loadingScreen when it\'s loading', () => {

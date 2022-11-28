@@ -6,7 +6,7 @@ describe('Component: PlayerControls', () => {
     const reference = { current: null };
 
     render(
-      <PlayerControls videoRef={reference} name='player_name' />
+      <PlayerControls videoRef={reference} name='player_name' setIsWaiting={jest.fn()} />
     );
 
     expect(screen.getByTestId('progressbar')).toBeInTheDocument();

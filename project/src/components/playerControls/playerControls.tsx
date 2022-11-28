@@ -7,13 +7,14 @@ import './playerControls.css';
 type PlayerControlsProps = {
   videoRef: MutableRefObject<HTMLVideoElement | null>;
   name: string;
+  setIsWaiting: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PlayerControls = ({videoRef, name}: PlayerControlsProps): JSX.Element => (
+const PlayerControls = ({videoRef, name, setIsWaiting}: PlayerControlsProps): JSX.Element => (
   <div className="player__controls">
     <ProgressBar videoRef={videoRef} />
     <div className="player__controls-row">
-      <PlayButton videoRef={videoRef} />
+      <PlayButton videoRef={videoRef} setIsWaiting={setIsWaiting} />
       <div className="player__name">{name}</div>
       <FullScreenButton />
     </div>
