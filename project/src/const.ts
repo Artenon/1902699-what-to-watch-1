@@ -31,7 +31,7 @@ export enum Tab {
   Reviews = 'Reviews'
 }
 
-export const AllGenres = 'All Genres';
+export const AllGenres = 'All genres';
 
 export enum APIRoute {
   Films = '/films',

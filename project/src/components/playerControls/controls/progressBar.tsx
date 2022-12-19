@@ -32,6 +32,14 @@ const ProgressBar = ({videoRef}: ProgressBarProps): JSX.Element => {
           setProgressValue(time);
         }
       });
+
+      if (videoRef.current) {
+        videoRef.current.addEventListener('loadedmetadata', () => {
+          if (videoRef.current) {
+            setTimeLeft(getHHMMSS(videoRef.current.duration));
+          }
+        });
+      }
     }
   }, [videoRef]);
 
@@ -41,7 +49,7 @@ const ProgressBar = ({videoRef}: ProgressBarProps): JSX.Element => {
     }
   };
 
-  const maxProgressValue = Math.floor(videoRef.current ? videoRef.current.duration : 0);
+  const maxProgressValue = String(Math.floor(videoRef.current ? videoRef.current.duration : 0));
 
   return (
     <div className="player__controls-row" data-testid="progressbar">

@@ -2,14 +2,19 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
+import { createMemoryHistory } from 'history';
+import HistoryRouter from '../historyRouter/historyRouter';
 import FormReview from './formReview';
 
 const mockStore = configureMockStore();
+const history = createMemoryHistory();
 
 const TestApp = (
-  <Provider store={mockStore()}>
-    <FormReview />
-  </Provider>
+  <HistoryRouter history={history}>
+    <Provider store={mockStore()}>
+      <FormReview />
+    </Provider>
+  </HistoryRouter>
 );
 
 describe('Component: FormReview', () => {
@@ -27,6 +32,11 @@ describe('Component: FormReview', () => {
 
     await userEvent.type(screen.getByRole('textbox'), 'Test comment');
     expect(screen.getByDisplayValue('Test comment')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeDisabled();
+
+    const text50 = 'Lorem ipsum dolor sit amet consectetur';
+    await userEvent.type(screen.getByRole('textbox'), text50);
+    expect(screen.getByRole('button')).toBeEnabled();
 
     await userEvent.click(screen.getByLabelText('Rating 5'));
     expect(screen.getByLabelText('Rating 5')).toBeChecked();

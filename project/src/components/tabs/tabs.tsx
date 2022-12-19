@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getCurrentFilm, getComments } from '../../store/current-film-data/selectors';
 import { Tab } from '../../const';
-import { MovieOverview, MovieDetails, MovieReviews } from '../movieTabs';
+import { MovieOverview, MovieDetails, MovieReviews } from '../movieTabs/movieTabs';
 import NotFound from '../../pages/notFound/notFound';
 
 function Tabs(): JSX.Element {
