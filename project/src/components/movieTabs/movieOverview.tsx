@@ -16,7 +16,7 @@ function MovieOverview(props: MovieOverviewProps) {
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{getRatingLevel(rating)}</span>
-          <span className="film-rating__count">{scoresCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} ratings</span>
+          <span className="film-rating__count">{scoresCount/* .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') */} ratings</span>
         </p>
       </div>
 
