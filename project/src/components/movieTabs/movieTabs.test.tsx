@@ -16,7 +16,7 @@ describe('Components: MovieTabs', () => {
 
     expect(screen.getByText(7).className).toEqual('film-rating__score');
     expect(screen.getByText('Good')).toBeInTheDocument();
-    expect(screen.getByText('10 000 ratings')).toBeInTheDocument();
+    expect(screen.getByText('10000 ratings')).toBeInTheDocument();
     expect(screen.getByText('Director: director')).toBeInTheDocument();
     expect(screen.getByText('Starring: actor1, actor2 and other')).toBeInTheDocument();
     expect(screen.getByText('description')).toBeInTheDocument();

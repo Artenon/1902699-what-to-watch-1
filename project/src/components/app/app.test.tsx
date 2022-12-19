@@ -7,7 +7,7 @@ import { Store } from '@reduxjs/toolkit';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import HistoryRouter from '../historyRouter/historyRouter';
 import { State } from '../../types/state';
-import { AuthorizationStatus, AppRoute } from '../../const';
+import { AuthorizationStatus, AppRoute, AllGenres } from '../../const';
 import App from './app';
 import { createAPI } from '../../services/api';
 import { makeFakeFilm, makeFakeComment, makeFakeUser } from '../../utils/mocks';
@@ -30,7 +30,7 @@ const initStore = mockStore({
     listOfFilms: [makeFakeFilm({}), makeFakeFilm({})],
     promoFilm: makeFakeFilm({}),
     isLoading: false,
-    currentGenre: 'All Genres',
+    currentGenre: AllGenres,
     genres: []
   },
   CURRENT_FILM: {
