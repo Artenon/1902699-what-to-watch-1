@@ -38,15 +38,12 @@ export const currentFilmData = createSlice({
       .addCase(fetchSimilarFilmsById.fulfilled, (state, action) => {
         state.similarFilms = action.payload;
       })
-      .addCase(postComment.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(postComment.fulfilled, (state, action) => {
         state.comments = action.payload;
-        state.isLoading = false;
+        toast.success('Your review successfully posted!', toastifyOptions);
       })
       .addCase(postComment.rejected, () => {
-        toast.error('Couldn\'t post your review', toastifyOptions);
+        toast.error('Couldn\'t post your review, try again later.', toastifyOptions);
       });
   }
 });

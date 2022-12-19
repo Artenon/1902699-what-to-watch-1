@@ -1,12 +1,12 @@
 import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { redirect } from '../../store/actions';
 import { postComment } from '../../store/api-actions';
 import { AppRoute } from '../../const';
 
 function FormReview() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const filmId = String(useParams().filmId);
 
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ function FormReview() {
 
   const onChangeReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({...formData, comment: e.target.value});
-    if (formData.comment.length >= 50 && formData.comment.length <= 400) {
+    if (e.target.value.length >= 50 && e.target.value.length <= 400) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
@@ -34,7 +34,7 @@ function FormReview() {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(postComment({filmId, comment: formData.comment, rating: formData.rating}));
-    dispatch(redirect(`${AppRoute.Films}/${filmId}`));
+    navigate(`${AppRoute.Films}/${filmId}`);
   };
 
   return (
