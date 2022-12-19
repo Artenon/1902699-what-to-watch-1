@@ -32,6 +32,14 @@ const ProgressBar = ({videoRef}: ProgressBarProps): JSX.Element => {
           setProgressValue(time);
         }
       });
+
+      if (videoRef.current) {
+        videoRef.current.addEventListener('loadedmetadata', () => {
+          if (videoRef.current) {
+            setTimeLeft(getHHMMSS(videoRef.current.duration));
+          }
+        });
+      }
     }
   }, [videoRef]);
 
