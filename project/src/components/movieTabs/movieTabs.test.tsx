@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { MovieOverview, MovieDetails, MovieReviews } from './index';
+import { MovieOverview, MovieDetails, MovieReviews } from './movieTabs';
 import { makeFakeComment } from '../../utils/mocks';
 
 describe('Components: MovieTabs', () => {
