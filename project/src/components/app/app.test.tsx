@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { Store } from '@reduxjs/toolkit';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import HistoryRouter from '../historyRouter/historyRouter';
+import HistoryRouter from '../history-router/history-router';
 import { State } from '../../types/state';
 import { AuthorizationStatus, AppRoute, AllGenres } from '../../const';
 import App from './app';

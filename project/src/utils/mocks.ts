@@ -1,7 +1,7 @@
 import { datatype, music, image, date, internet, name } from 'faker';
 import { Comment } from '../types/comment';
 import { Film } from '../types/film';
-import { UserData } from '../types/userData';
+import { UserData } from '../types/user-data';
 
 const getStarring = (): string[] => [name.findName(), name.findName(), name.findName()];
 

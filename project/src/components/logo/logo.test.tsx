@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import HistoryRouter from '../historyRouter/historyRouter';
+import HistoryRouter from '../history-router/history-router';
 import Logo from './logo';
 
 const history = createMemoryHistory();

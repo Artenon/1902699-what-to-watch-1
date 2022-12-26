@@ -1,18 +1,18 @@
 import { Routes, Route } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import MainContent from '../../pages/mainContent/mainContent';
-import NotFound from '../../pages/notFound/notFound';
-import SignIn from '../../pages/signIn/signIn';
-import MyList from '../../pages/myList/myList';
-import MoviePage from '../../pages/moviePage/moviePage';
-import AddReview from '../../pages/addReview/addReview';
+import MainContent from '../../pages/main-content/main-content';
+import NotFound from '../../pages/not-found/not-found';
+import SignIn from '../../pages/sign-in/sign-in';
+import MyList from '../../pages/my-list/my-list';
+import MoviePage from '../../pages/movie-page/movie-page';
+import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
-import PrivateRoute from '../privateRoute/privateRoute';
+import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../const';
-import ScrollToTop from '../scrollToTop/scrollToTop';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import LoadingScreen from '../../pages/loadingScreen/loadingScreen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { getMyList } from '../../store/api-actions';
 
 function App(): JSX.Element {

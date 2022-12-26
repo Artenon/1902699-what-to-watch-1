@@ -8,7 +8,7 @@ import MockAdapter from 'axios-mock-adapter';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Routes, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import HistoryRouter from '../../components/historyRouter/historyRouter';
+import HistoryRouter from '../../components/history-router/history-router';
 import Player from './player';
 import { State } from '../../types/state';
 import { makeFakeFilm } from '../../utils/mocks';

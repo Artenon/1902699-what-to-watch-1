@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getCurrentFilm, getComments } from '../../store/current-film-data/selectors';
 import { Tab } from '../../const';
-import { MovieOverview, MovieDetails, MovieReviews } from '../movieTabs/movieTabs';
-import NotFound from '../../pages/notFound/notFound';
+import { MovieOverview, MovieDetails, MovieReviews } from '../movie-tabs/movie-tabs';
+import NotFound from '../../pages/not-found/not-found';
 
 function Tabs(): JSX.Element {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);

@@ -1,6 +1,6 @@
 import { store } from '../store';
 import { AuthorizationStatus } from '../const';
-import { UserData } from './userData';
+import { UserData } from './user-data';
 import { Film } from './film';
 import { Comment } from './comment';
 
