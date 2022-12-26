@@ -8,6 +8,7 @@ export const toastifyOptions: ToastOptions = {
   theme: 'colored',
   position: 'bottom-right',
   autoClose: 4000,
+  toastId: 1
 };
 
 export enum AppRoute {
