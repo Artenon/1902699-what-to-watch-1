@@ -3,10 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getCurrentFilm, getLoadingStatus } from '../../store/current-film-data/selectors';
-import NotFound from '../notFound/notFound';
-import PlayerControls from '../../components/playerControls/playerControls';
+import NotFound from '../not-found/not-found';
+import PlayerControls from '../../components/player-controls/player-controls';
 import { fetchFilmById } from '../../store/api-actions';
-import LoadingScreen from '../loadingScreen/loadingScreen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 const loaderWrapperStyles: React.CSSProperties = {
   position: 'absolute',

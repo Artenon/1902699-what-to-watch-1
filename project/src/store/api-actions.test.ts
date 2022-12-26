@@ -5,8 +5,8 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { createAPI } from '../services/api';
 import { APIRoute } from '../const';
 import { State } from '../types/state';
-import { AuthData } from '../types/authData';
-import { PostCommentData } from '../types/postCommentData';
+import { AuthData } from '../types/auth-data';
+import { PostCommentData } from '../types/post-comment-data';
 import {
   getAuthorizationStatus,
   loginAction,

@@ -5,8 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
 import { store } from './store';
 import { getAuthorizationStatus } from './store/api-actions';
-import HistoryRouter from './components/historyRouter/historyRouter';
-import { browserHistory } from './browserHistory';
+import HistoryRouter from './components/history-router/history-router';
+import { browserHistory } from './browser-history';
 import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(getAuthorizationStatus());

@@ -1,4 +1,4 @@
-import { UserData } from '../types/userData';
+import { UserData } from '../types/user-data';
 
 const KEY_NAME = 'user-data';
 
