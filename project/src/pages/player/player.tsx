@@ -48,7 +48,7 @@ function Player() : JSX.Element {
 
   return (
     <div className="player">
-      <video className="player__video" poster={currentFilm.backgroundImage} ref={videoRef} data-testid="video">
+      <video className="player__video" poster={currentFilm.backgroundImage} ref={videoRef} data-testid="video" autoPlay>
         <source src={currentFilm.videoLink} />
       </video>
 
